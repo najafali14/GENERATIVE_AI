@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Governor Initiative for Artificial Intelligence, Web 3.0 and Metaverse">
+    <meta name="keywords" content="prompt, response, Governor Initiative for Artificial Intelligence, Web 3.0 and Metaverse, SEO, GenAi,
+    generative ai, ChatBot, Governor GPT, Governor Sindh, IT Course, Panaverse, Sir Zia khan, Governor It Course, Giaic GPT, GiaicGPT, Giaic,
+    GPT, Governor GPT, Governor Course GPT, Giaic GPT
+    ">
+    <title>GIAIC GPT</title>
+    <link rel="icon" type="image/x-icon" href="https://www.governorsindh.com/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 92vh;
+
+            background-color: #f4f4f4;
+        }
+        #container {
+            display: flex;
+            width: 95%;
+            height: 95%;
+        }
+        #menu-button {
+            display: none;
+            background-color: #f1f1f1;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+        #announcements {
+            width: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            display: block;
+        }
+        #announcements.hidden {
+            transform: translateX(-100%);
+        }
+        #announcements.show {
+            transform: translateX(0);
+        }
+        #chat-section {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        #chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column-reverse;
+            overflow-y: auto;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            /*background: grey;*/
+            /*padding: 10px;*/
+            /*box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);*/
+            /*border-top: 1px solid #ccc;*/
+        }
+        label {
+            display: none;
+        }
+        input[type="text"] {
+            width: 85%;
+            height:45px;
+            padding: 10px;
+            border: 1px solid grey;
+            border-radius: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: #f0f0f5;
+        }
+        input[type="submit"] {
+            display: none;
+        }
+        .response {
+            width: 100%;
+            margin-bottom: 260px;
+            /*padding: 15px;*/
+            /* background: #fff; */
+            border-radius: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        @media (min-width: 768px) {
+            #container {
+                flex-direction: row;
+            }
+            #announcements {
+                width: 30%;
+                transform: translateX(0);
+                display: block;
+            }
+            #chat-section {
+                width: 70%;
+            }
+            #menu-button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #menu-button {
+                display: block;
+            }
+            #announcements {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                max-width: 300px;
+                transform: translateX(-100%);
+                z-index: 999;
+                background-color: #f1f1f1;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <button id="menu-button" onclick="toggleAnnouncements()">☰</button>
+        <div id="announcements">
+            <h2 style="color:rgb(12, 161, 247);margin-left:25px;margin-top:2px;">Announcements</h2>
+
+            <div style="display: flex; margin-left:25px;margin-top:2px;">
+                <a href="https://whatsapp.com/channel/0029VaDV3lsADTOK3izlJx0p" target="_blank" style="text-decoration: none; color: inherit; font-size: 24px;">
+                    <i class="fab fa-whatsapp" style="transition: transform 0.3s ease;"></i>
+                </a>
+                &emsp;&emsp;
+                <a href="https://www.linkedin.com/in/najafali14/" target="_blank" style="text-decoration: none; color: inherit; font-size: 24px;">
+                    <i class="fab fa-linkedin" style="transition: transform 0.3s ease;"></i>
+                </a>
+                &emsp;&emsp;
+                <a href="https://www.youtube.com/@Giaic14" target="_blank" style="text-decoration: none; color: inherit; font-size: 24px;">
+                    <i class="fab fa-youtube" style="transition: transform 0.3s ease;"></i>
+                </a>
+            </div>
+
+            <ul>
+                <li>Now admissions are open in Hyderabad</li>
+<li>Jobs/ Internships coming soon</li>
+
+
+
+            </ul>
+        </div>
+        <div id="chat-section">
+            <h2 style="padding-left:12%; color:rgb(12, 161, 247);"><b>Governor Initiative for GenAI, Web 3.0 and Metaverse</b></h2>
+            <div id="chat-container">
+
+                {% if btn %}
+                <div class="response">
+
+                    <div style="padding-left:15%;">
+                    <b >You: </b> {{ prompt }} <br> <br>
+                    <b >GiaicGPT: </b> {{ re }}
+        </div>
+                </div>
+
+                <!-- else block for show options before button clicks -->
+                {% else %}
+                <div style="position: relative; width: 90%; max-width: 400px; margin: 20px auto; padding: 15px;
+                background: #f8f8f8; border-radius: 5px; text-align: center;margin-bottom: 100px;">
+                    <div style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px;">
+                        Submit Your Email To GiaicGPT
+                    </div>
+                    <div style="font-size: 16px; color: #666;">
+                        Receive the latest updates directly to your inbox. By submitting your email, you agree to subscribe to our newsletter.
+                    </div>
+
+                </div>
+<!--end else-->
+
+                {% endif %}
+            </div>
+            <form action="/" method="post">
+                <!--<label for="prompt"><b>Message GIAIC GPT</b></label>-->
+                <input type="text" id="prompt" name="prompt" required placeholder="Message GiaicGPT">
+
+                <input type="submit" value="Submit" name="btn">
+            </form>
+
+        </div>
+
+    </div>
+    <script>
+        function toggleAnnouncements() {
+            var announcements = document.getElementById("announcements");
+            if (announcements.classList.contains("hidden")) {
+                announcements.classList.remove("hidden");
+                announcements.classList.add("show");
+            } else {
+                announcements.classList.remove("show");
+                announcements.classList.add("hidden");
+            }
+        }
+    </script>
+
+</body>
+</html>
