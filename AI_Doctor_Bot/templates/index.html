@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Assistant</title>
+
+    <!-- Google Fonts for professional typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent scrolling */
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #2a9df4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .image-container {
+            width: 300px;
+            height: 365px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #placeholderImg, #doctorGif {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            position: absolute;
+            display: none;
+        }
+
+        #placeholderImg {
+            display: block; /* Show the placeholder initially */
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            position: absolute;
+            bottom: 20px; /* Position the form at the bottom */
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background-color: #2a9df4;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:disabled {
+            background-color: #b0bec5;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #2387d4;
+        }
+
+        /* Media query for Android devices or small screens */
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: calc(100% - 100px); /* Adjust width for smaller screens */
+            }
+
+            .image-container {
+                width: 250px;
+                height: 300px;
+            }
+        }
+    </style>
+
+    <script>
+        async function askQuestion(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const question = document.getElementById("question").value;
+            const button = document.getElementById("askButton");
+
+            button.disabled = true; // Disable the button while processing
+
+            try {
+                // Send the question to the Flask server
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    body: new URLSearchParams({ question })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Ensure the response is a blob (audio)
+                const blob = await response.blob();
+
+                if (!blob.type.startsWith('audio/')) {
+                    throw new Error('Expected audio file, but received: ' + blob.type);
+                }
+
+                // Create audio element and set its source
+                const audioUrl = URL.createObjectURL(blob);
+                const audio = new Audio(audioUrl);
+
+                // Get the image elements for the placeholder and the GIF
+                const gif = document.getElementById("doctorGif");
+                const placeholder = document.getElementById("placeholderImg");
+
+                // Swap the placeholder with the GIF when the audio starts
+                audio.onplay = () => {
+                    placeholder.style.display = 'none';
+                    gif.style.display = 'block';
+                };
+
+                // Hide the GIF and show the placeholder when the audio ends
+                audio.onended = () => {
+                    gif.style.display = 'none';
+                    placeholder.style.display = 'block';
+                    button.disabled = false; // Re-enable the button after audio ends
+                };
+
+                // Automatically play the audio
+                audio.play();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error processing your request. Please try again.');
+                button.disabled = false; // Re-enable the button if an error occurs
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>AI Health Assistant</h1>
+
+    <!-- Image and GIF container at the top -->
+    <div class="image-container">
+        <!-- Placeholder image shown before and after audio playback -->
+        <img id="placeholderImg" src="/static/placeholder.png" alt="Doctor Placeholder">
+        
+        <!-- GIF hidden initially, shown only while audio is playing -->
+        <img id="doctorGif" src="/video/doctor.gif" alt="Doctor GIF">
+    </div>
+
+    <!-- Form positioned at the bottom with inline button -->
+    <form onsubmit="askQuestion(event)">
+        <input type="text" id="question" name="question" placeholder="Type your health question here..." required>
+        <button type="submit" id="askButton">Ask</button>
+
+    </form>
+    <h3 style="padding-bottom:100px">Developed by Najaf Ali</h3>
+
+
+</body>
+</html>
