@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Configure the API key for the Generative AI service
-genai.configure(api_key='AIzaSyDZVaeCYR5DeUwGOvFJWhapQ-b7psA5eIk')
+genai.configure(api_key='Your API Key')
 
 # Initialize the GenerativeModel with the tool
 model = genai.GenerativeModel(model_name='gemini-1.5-flash',
