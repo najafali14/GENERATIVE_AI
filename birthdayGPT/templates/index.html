@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>AI Based Birthday</title>
+    <style>
+        body {
+            margin: 0; /* Remove default margin */
+            overflow: hidden; /* Prevent scrolling */
+            position: relative;
+            height: 100vh; /* Use full viewport height */
+            background-color: #282c34; /* Dark background for contrast */
+            animation: backgroundAnimation 10s infinite alternate; /* Background animation */
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #282c34; }
+            50% { background-color: #1c1f23; }
+            100% { background-color: #282c34; }
+        }
+
+        .quote-container {
+            color: white;
+            font-size: 1.2em; /* Smaller font size */
+            text-align: center;
+            z-index: 1;
+            position: absolute; /* Positioning it on top of the GIF */
+            top: 10%; /* Positioned at the top */
+            left: 50%;
+            transform: translate(-50%, 0); /* Centering horizontally */
+            width: 70%; /* Decreased width of the quote */
+            max-width: 400px; /* Adjusted maximum width for larger screens */
+            background: rgba(255, 105, 180, 0.5); /* More transparent background */
+            padding: 20px; /* Reduced padding */
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Enhanced shadow effect */
+            animation: fadeIn 1s ease-in, slideIn 1s ease-out; /* Fade and slide-in animation */
+            border: 3px solid rgba(255, 255, 255, 0.4); /* Gradient border */
+        }
+
+        @keyframes slideIn {
+            0% { transform: translate(-50%, -20%); opacity: 0; }
+            100% { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        h2 {
+            margin: 0; /* Remove default margin from h2 */
+            font-family: 'Dancing Script', cursive; /* Decorative font */
+            font-size: 1.8em; /* Title size */
+            color: #ffeb3b; /* Bright color for title */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Text shadow for title */
+        }
+
+        .quote-text {
+            font-family: 'Roboto', sans-serif; /* Clean font for quote text */
+            font-weight: 300; /* Light weight for readability */
+            color: white; /* Color for quote text */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for quote */
+            margin-top: 10px; /* Space above quote */
+        }
+
+        strong {
+            font-weight: bold; /* Bold for the name */
+            display: block; /* Make name appear on a new line */
+            margin-top: 10px; /* Space above name */
+            font-size: 1em; /* Adjusted font size for name */
+        }
+
+        img {
+            position: absolute; /* Make sure the image is positioned absolutely */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            object-fit: cover; /* Cover the entire area without distortion */
+            z-index: -1; /* Send image to the background */
+            opacity: 0.7; /* Slight transparency for the background */
+            animation: fadeInBackground 2s ease-in; /* Fade-in for the background image */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Media query for Android devices */
+        @media (max-width: 600px) {
+            .quote-container {
+                font-size: 1em; /* Smaller font size for smaller screens */
+                width: 90%; /* Wider width on smaller screens */
+                max-width: 95%; /* Adjust max width to fit smaller screens */
+                padding: 15px; /* Reduced padding */
+                top: 0; /* Adjusted top to place at the top */
+                transform: translate(-50%, 0); /* Centering horizontally */
+            }
+            h2 {
+                font-size: 1.5em; /* Adjust title size for smaller screens */
+            }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            console.log("Page loaded. Checking user agent...");
+            if (/Android/i.test(navigator.userAgent)) {
+                console.log("Android device detected.");
+                document.getElementById('birthdayGif').src = 'static/bv2.gif'; // Replace with your Android GIF path
+                console.log("GIF source changed to Android version.");
+            } else {
+                console.log("Not an Android device.");
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="quote-container">
+        <h2>Happy Birthday Yamman</h2>
+        <b style="color: rgb(46, 0, 197);">{{remaining_days}}</b> days left
+        <div class="quote-text">{{quote}}</div>
+        <strong>Najaf Ali</strong>
+    </div>
+    <img id="birthdayGif" src="static/bv1.gif" alt="birthday">
+</body>
+</html>
