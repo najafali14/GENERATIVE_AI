@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI Blog</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, #1a73e8, #673ab7);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        header p {
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-top: 15px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #1a73e8, 0 0 30px #673ab7;
+            }
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #1a73e8, 0 0 40px #673ab7;
+            }
+        }
+
+        /* Blog Container */
+        .blog-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Individual Blog Post Styling */
+        .post {
+            background-color: #fff;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #1a73e8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .post:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-left-color: #673ab7;
+        }
+
+        .post h2 {
+            margin-top: 0;
+            font-size: 2em;
+            color: #1a73e8;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .post:hover h2 {
+            color: #673ab7;
+        }
+
+        .post p {
+            font-size: 1em;
+            line-height: 1.7;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .post .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #1a73e8;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .post .read-more:hover {
+            background-color: #673ab7;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .post h2 {
+                font-size: 1.5em;
+            }
+
+            .post p {
+                font-size: 0.9em;
+            }
+
+            .post .read-more {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>GenAI Blog</h1>
+        <p>Your daily dose of AI-generated insights</p>
+    </header>
+
+    <!-- Blog Container -->
+    <div class="blog-container">
+
+        <!-- Blog Post 1 -->
+        <div class="post">
+            <h2>{{ title }}</h2>
+            <p>{{ post }}</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 GenAI Blog. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
